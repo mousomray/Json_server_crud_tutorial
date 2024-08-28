@@ -1,52 +1,68 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
-// Data is fetch in one time 
+
+// Store URL here 
 const API_URL = 'http://127.0.0.1:3003/users'
 
-// For Add Data in Get API using Post API. (Use this function in Adduser.jsx file);
+// Add user on JSON Server
 export const addUser = async (data) => {
     try {
-        return await axios.post(API_URL, data)
-    }
-    catch (error) {
+        const response = await axios.post(API_URL, data);
+        console.log("Fetching Add User Data", response);
+        toast.success("User Added Successfully")
+        return response
+    } catch (error) {
         console.log('Error while calling addUser API', error.message)
+        toast.error("User Added Not Possiable")
     }
 }
 
-// For show Data in get API. (Use this function in Showuser.jsx file)
+// All Users List
 export const getUsers = async () => {
     try {
-        return await axios.get(API_URL)
+        const response = await axios.get(API_URL)
+        console.log("Fetching user list data...", response);
+        return response
     }
     catch (error) {
         console.log('Error while calling getUsers API', error.message)
     }
 }
 
-// This is make for edit data
-export const getUser = async (data) => {
+// Single User Data
+export const detailsuser = async (data) => {
     try {
-        return await axios.get(`${API_URL}/${data}`)
+        const response = await axios.get(`${API_URL}/${data}`)
+        console.log("Fetching Single Data", response);
+        return response
     }
     catch (error) {
         console.log('Error while calling getUser API', error.message)
     }
 }
 
-// this is also a part of edit data
+// Edit User
 export const editUser = async (data, id) => {
     try {
-        return await axios.put(`${API_URL}/${id}`, data)
+        const response = await axios.put(`${API_URL}/${id}`, data)
+        console.log("Fetching Edit Data...", response);
+        toast.success("User Edit Successfully")
+        return response
     }
     catch (error) {
         console.log('Error while calling editUser API', error.message)
+        toast.error("User Edit Not Possiable")
     }
 }
 
-// This is make for delete data from table.
+// Delete Data
 export const deleteUser = async (id) => {
     try {
-        return await axios.delete(`${API_URL}/${id}`)
+        const response = await axios.delete(`${API_URL}/${id}`)
+        console.log('Fetching Delete Data...', response)
+        toast.warning("User Deleted Successfully")
+        return response
     }
     catch (error) {
         console.log('Error while calling deleteUser API', error.message)

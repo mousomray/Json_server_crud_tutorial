@@ -1,36 +1,6 @@
 {
   "users": [
     {
-      "id": "4eb1",
-      "name": "Mousom Ray",
-      "email": "asas08@gmail.com",
-      "phone": "8478965412",
-      "password": "asasadsd",
-      "city": "assasaas",
-      "state": "asassa",
-      "dob": "2024-02-27"
-    },
-    {
-      "id": "7dfc",
-      "name": "Mousom Ray",
-      "email": "mou02@gmail.com",
-      "phone": "8017505010",
-      "password": "8017505010",
-      "city": "asasasas",
-      "state": "assaas",
-      "dob": "4477-05-04"
-    },
-    {
-      "id": "b76f",
-      "name": "Sudip",
-      "email": "sudipray6193@gmail.com",
-      "phone": "6290620963",
-      "password": "8017505010",
-      "city": "sa",
-      "state": "ss",
-      "dob": "2024-04-02"
-    },
-    {
       "id": "f40f",
       "name": "Hanuma",
       "email": "as08@gmail.com",
@@ -42,13 +12,23 @@
     },
     {
       "id": "a29f",
-      "name": "Gopu",
+      "name": "Gopu Saha",
       "email": "goupjiu02@gmail.com",
       "phone": "8017505010",
       "password": "gpoew4www",
       "city": "Uttarpara",
       "state": "Westbengal",
       "dob": "0024-04-07"
+    },
+    {
+      "id": "30a9",
+      "name": "Priyanka Ghosal",
+      "email": "detailsuser@gmail.com",
+      "phone": "8017505010",
+      "password": "8017505010klklkl",
+      "city": "assaasas",
+      "state": "asasassa",
+      "dob": "1222-02-15"
     }
   ]
 }

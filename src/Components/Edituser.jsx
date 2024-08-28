@@ -4,10 +4,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import { editUser, getUser } from '../Services/Api' // Import two functions which I create for edit
-// For toast message
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { editUser, detailsuser } from '../Services/Api' // Import two functions which I create for edit
 
 // Set initial values
 const initialValues = {
@@ -152,8 +149,9 @@ const Edituser = () => {
         }
     };
 
+    // Fetching Single Data For Edit
     const getData = async () => {
-        let response = await getUser(id) // Call getUser()function for edit
+        let response = await detailsuser(id) // Call detailsuser()function for edit
         setUser(response?.data)
         console.log(response);
 
@@ -168,7 +166,7 @@ const Edituser = () => {
         let ErrorList = validation()
         setError(validation())
 
-       // Validation for Submit
+        // Validation for Submit
         if (Object.keys(ErrorList).length === 0) {
             let reg = {
                 name: user.name,
@@ -185,41 +183,34 @@ const Edituser = () => {
 
 
     }
-    
+
     // This function is make to click on edit button
     const handleOnClick = async () => {
         let ErrorList = validation()
         setError(validation())
         // This is make for use validation
         if (Object.keys(ErrorList).length === 0) {
-            await editUser(user, id) // call editUser()function for edit 
-                .then((response) => {
-                    console.log(response);
-                    toast.success("User edited successfully");
-
-                    setTimeout(() => {
-                        setLoading(false);
-                        navigate('/showuser')
-                    }, 2000);
-
-                })
-                .catch((error) => {
-                    console.log(error);
-                    toast.error("User is not edit");
+            try {
+                const response = await editUser(user, id)
+                console.log("My Edit Response is...", response);
+                if (response && response?.status === 200) {
                     setLoading(false);
-                })
+                    navigate('/showuser')
+                } else {
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.log("Bad Edit Response...", error);
+                setLoading(false);
+            }
         } else {
-            setTimeout(() => {
-                setLoading(false)
-            }, 1000);
+            setLoading(false)
         }
 
     }
 
     return (
         <>
-            <ToastContainer style={{ top: '10%', left: '50%', transform: 'translate(-50%, -50%)', alignItems: 'center', textAlign: 'center' }} />
-
             <section className="contact_section layout_padding" style={{ backgroundColor: '#f8f9fa', padding: '50px 0' }}>
                 <div className="container">
                     <div className="heading_container text-center">

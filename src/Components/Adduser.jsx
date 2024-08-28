@@ -2,9 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import { addUser } from '../Services/Api' // Import addUser function 
 import { useNavigate } from 'react-router-dom' // useNavigate for Navigation
-// For toast message
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 // Set initial values
@@ -168,27 +165,22 @@ const Adduser = () => {
 
         // Validiation for Submit
         if (Object.keys(ErrorList).length === 0) {
-            await addUser(user) // call addUser function
-
-            .then((response) =>{
-                console.log(response);
-                setLoading(false) // Loading will be stop after loading data
-                toast.success("User added successfully")
-                setTimeout(() => {
+            try {
+                const response = await addUser(user)
+                console.log("My Add response is ...", response);
+                if (response && response?.status === 201) {
+                    setLoading(false);
+                    setUser(initialValues);
                     navigate('/showuser')
-                }, 2000);
-            })
-            .catch((error) =>{
-                console.log(error);
-                setLoading(false) // Loading will be stop after not loading data
-                toast.error("User is not added")
-            })
-           
+                }else{
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.log("Bad Response...", error);
 
+            }
         } else {
-            setTimeout(() => {
-                setLoading(false);
-            }, 200);
+            setLoading(false)
         }
 
     };
@@ -196,8 +188,6 @@ const Adduser = () => {
 
     return (
         <>
-            <ToastContainer style={{ top: '10%', left: '50%', transform: 'translate(-50%, -50%)', alignItems: 'center', textAlign: 'center' }} />
-
             <section className="contact_section layout_padding" style={{ backgroundColor: '#f8f9fa', padding: '50px 0' }}>
                 <div className="container">
                     <div className="heading_container text-center">

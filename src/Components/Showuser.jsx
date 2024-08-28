@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getUsers } from '../Services/Api'; // Import getUsers() function 
 import { Link } from 'react-router-dom'; // For Link
 import { deleteUser } from '../Services/Api'; // Function for delete
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const Showuser = () => {
@@ -23,25 +22,15 @@ const Showuser = () => {
 
     // Create a function for delete
     const deleteUserData = async (id) => {
-        await deleteUser(id)
-            .then((response) => {
-                console.log(response);
-                getdata() // Call getdata()function   
-                toast.warn("User Deleted successfully");
-            })
-            .catch((error) =>{
-                console.log(error);
-                toast.error("User is not Deleted")
-            })
+        const response = await deleteUser(id)
+        console.log("My Delete Response is...",response);
+        getdata();
     }
 
 
     console.log('hd', user);
     return (
         <>
-            <ToastContainer style={{ top: '10%', left: '50%', transform: 'translate(-50%, -50%)', alignItems: 'center', textAlign: 'center' }} />
-
-
             <div className="container-fluid mt-5">
                 <table className="table table-bordered table-striped">
                     <thead className="thead-dark">
